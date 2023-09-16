@@ -4,7 +4,7 @@ title: Exceptions, good or bad?
 date: 2023-09-07 
 tags: general opinion
 categories: code
-author: Sidhin
+author: Sidhin S Thomas
 ---
 
 Whether or not to use exceptions is always a topic of contention. Everyone has their own different opinion. But what exactly are those? And should I use them or not? 
