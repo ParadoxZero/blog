@@ -4,6 +4,7 @@ title:  "Splitting your huge PR into smaller ones"
 date:   2023-09-16
 tags: workflow pr code automation
 categories: code
+author: Sidhin S Thomas
 published: true
 ---
 
