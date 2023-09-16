@@ -6,6 +6,6 @@ layout: home
 list_title: Recent posts
 ---
 
-# The path forward
+*The path forward*
 
-Life is messy. No denying that. But sometimes in the chaos of it, we find purpose. What's important is to recognize what makes us tick. That just might be the difference between being alive and living.
+*Life is messy. But sometimes in the chaos of it, we find purpose. It's importantto recognize what makes us tick. That just might be the difference between being alive and living.*
