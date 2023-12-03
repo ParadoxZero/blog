@@ -28,19 +28,19 @@ In other words, Exceptions are a kind of control flow statements a lot of langua
 ## So how do we handle failures?
 Let’s take an example –
  
-{% highlight cpp %}
+```cpp
 list<string> get_lines_from_file(char *filepath) {
   FILE *f = fopen(filepath);
   string content = f->read();
   return parse_content(content);
 }
-{% endhighlight %}
+```
 
 The above snippet is a pseudocode example of a of a simple function to open a file, then read it’s content and parse it to get number of lines.
 
 Now let’s just check from points of failure within the method.
 
-{% highlight cpp %}
+```cpp
 list<string> get_lines_from_file(char *filepath) {
   FILE *f = fopen(filepath);     // The file might not exists
 
@@ -50,11 +50,12 @@ list<string> get_lines_from_file(char *filepath) {
                                  // invalid token, like CRLF
                                  // instead of LF
 }
-{% endhighlight %}
+```
  
 Now let’s see how to handle these potential failures such that our program will be more robust and behaves in expected ways irrespective of the conditions.
 
-{% highlight cpp %}
+
+```cpp
 RESULT get_lines_from_file(char *filepath, list<string> &list) {
   FILE *f = fopen(filepath);
   if (f != NULL) {
@@ -64,7 +65,8 @@ RESULT get_lines_from_file(char *filepath, list<string> &list) {
     }
   }
 }
-{% endhighlight %}
+```
+
 
 Now here, RESULT can be maybe numeric code or an Enum with different values for different kind of failures.
 
@@ -81,7 +83,7 @@ With a standardized constants for the failures you can pretty much handle all fa
 
 Instead, it will always return the result. So no pretty, easy to read, assignment operations. That means, the caller of function will look something like this.
 
-{% highlight cpp %}
+```cpp
 // In the caller function
 list<string> list;
 RESULT res = get_lines_from_file("test.txt", list);
@@ -103,13 +105,13 @@ if (res != R_SUCCESS) {
     break;
   }
 }
-{% endhighlight %}
+```
 
 
 Using Exceptions
 The same code when using exception can easily look like this.
 
-{% highlight c++ %}
+```cpp
 list<string> get_lines_from_file(char *filepath) {
   FILE *f = fopen(filepath);
   string content = f->read();
@@ -130,7 +132,7 @@ catch (FileNotFoundException) {
 } catch (Exception) {
   print("Failed");
 }
-{% endhighlight %}
+```
 
 Notice that the get_lines function can remain unchanged from the unsafe version, with only modification being required in the caller side.
 
