@@ -7,5 +7,47 @@ categories: code
 published: false
 ---
 
-The story begins with ASN1. What is it? Why do we need it?
+Let's start with a problem. You want to build a communication protocol for your new and interesting application. What is the most basic thing you need to get started?
 
+A description of the said protocol. What's the data you will send, how will it look what's the sequence etc. Now you can do this in plain english using maybe bullet lists. You can even use use class diagrams. What if I told you there exists a description language which is perfect for your usecase. A language to describe data, without specifying how it will be reprecented.
+
+The language in question is - ASN.1 - a.k.a - Abstract Syntax Notation ver 1.
+
+ASN.1 is at it's core a very simple to read and write description language that look very familiar if you know c-style structs. A trivial example - 
+```asn.1
+Student ::= SEQUENCE {
+    id INTEGER,
+    name UTF8String,
+    age INTEGER,
+    courses SEQUENCE OF Courses
+}
+```
+That's all. This describes a sequence of data, where first item would be the id, the next name and so on. There is no mention of encoding, how is it represented. Is it a human readable JSON, or less readable but tedious XML, or something more exotic and binary - BER?
+
+That's the beauty of it. The following JSON is a valid object based on the asn.1 description above - 
+```json
+{
+    "id": 12345,
+    "name": "John Doe",
+    "age": 20,
+    "courses": []
+}
+```
+Or the XML - 
+```xml
+<Student>
+    <id>12345</id>
+    <name>John Doe</name>
+    <age>20</age>
+    <courses>
+    </courses>
+</Student>
+```
+
+There is a whole lot of rules, types, construction of type etc for asn.1 which you can read from the original spec - https://www.rfc-editor.org/rfc/rfc6025 or any other references like - https://www.oss.com/asn1/resources/asn1-made-simple/asn1-quick-reference.html which is definitely worth a visit if you are interested.
+
+## BER - Basic Encoding Rules
+Todo
+
+## Options for Parsing BER
+Todo
