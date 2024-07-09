@@ -73,7 +73,7 @@ Chances are you always interact with it in your digital life, the SSL/ TLS certi
 The E2E encryption every application uses? Yep, protocol described in ASN.1. PGP, Digital Signatures, Encryption, all of it in BER and described using ASN.1.
 
 ## PER and OER
-Packed Encoding Rules and 
+Packed Encoding Rules and Octet Encoding rules are more effecient encoding format that are supported by ASN.1 syntax. These can help reduce redundancy and latency due to having to transmit lesser amount of data. WIthout loosing the constrains configurable in ASN.1 syntax.
 
 ## Parsing ASN.1 based binary formats
 If you want to build an application that wants to use binary communication vs JSON. ASN.1 is a very good candidate. You can have efficient fast easy to parse protocols using ASN.1. 
