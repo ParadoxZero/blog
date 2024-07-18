@@ -35,8 +35,22 @@ winget install Neovim.Neovim
 sudo port install neovim
 ```
 
-This is where it starts. I tried the vimtutor which describes the basics of VIM. The different modes, how you do all sorts of text editor operations
-like copy, move word to word, search, edit just a character etc. Loved the tutorial.
+This is where it starts. I tried the vimtutor which describes the basics of VIM. The different modes, how you do all sorts of text editor operations. like copy, move word to word, search, edit just a character etc. Loved the tutorial.
 
 It just simply made sense! There are all sorts of nifty movement mechanisms. Fine-tuned search replace. Deleting lines, yank, replace, clear etc. All of them
 very fun to use. And makes you feel so productive.
+
+But then I had to customize the editor. Install plugins etc. After reading about it a bit. I realized it's too much effort to spend right now so decided to install Vim extension in Vscode. Should get most of advantages there.
+
+### Vscode Vim mode
+
+This was pretty good, I get to experience Vim motions in my already configured to perfection editor. Over than the usual Vim keybindings I found the following very useful - 
+
+-  Ctrl + ` for opening terminal
+- `ctrl + P` for file switching and commands (Type ">")
+- `ctrl + shift + E` for file explorer - though I'll be honest, mouse is faster than keyboard for navigating it. Since I can't prefix the path by typing.
+- `ctrl + B `- to close side bar
+- `ctrl + shift + B` Secondary bar where my copilot chat is present.
+
+
+
