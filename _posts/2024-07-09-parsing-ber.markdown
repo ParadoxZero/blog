@@ -15,7 +15,7 @@ A description of the said protocol. What's the data you will send, how will it l
 The language in question is - ASN.1 - a.k.a - Abstract Syntax Notation ver 1.
 
 ASN.1 is at it's core a very simple to read and write description language that look very familiar if you know c-style structs. A trivial example - 
-```asn.1
+```
 Student ::= SEQUENCE {
     id INTEGER,
     name UTF8String,
