@@ -75,7 +75,7 @@ Another big reason I couldn't continue with vscode was that I realized I don't d
 My workflow generally is code research, debugging, and only little bit of addition. Very rarely am I writing full blown 
 new classes and modules. Maybe 5 times a year. 
 
-For most part I am intersted in making small changes in large amount of files that can be in arbitary locations accorss code bases. I realized for these things I really like the traditional GUI + Keybinding workflow used in vscode vs keyboard heavy one. For example, scolling around code without knowling a keyword is a big thing I do, which totally defeats the keyword based file movement in vim. I can defintely use mouse scroll in nvim too, but that then defeats the purpose. 
+For most part I am intersted in making small changes in large amount of files that can be in arbitary locations accorss code bases. I realized for these things I really like the traditional GUI + Keybinding workflow used in vscode vs keyboard heavy one. For example, scolling around code without knowing a keyword is a big thing I do, which totally defeats the keyword based file movement in vim. I can defintely use mouse scroll in nvim too, but that then defeats the purpose. 
 
 In fact the mode based editing actively hinders this workflow where I scroll the file searching for a pattern that I can't search for, seeing the relavent spot, I'll then add or delete some code by placing curor on the correct spot. 
 
