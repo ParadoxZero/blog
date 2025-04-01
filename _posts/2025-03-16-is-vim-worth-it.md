@@ -18,7 +18,7 @@ In general the arguements I have heard boils down to these -
 * It's pretty damn cool!
 
 Very compelling, and it does look cool seeing all the commandline jutsu I see people do in office. So naturally I too succumb
-to peer pressure, and decided decided. You know what, I also want to be a haxxor.
+to peer pressure, and decided. You know what, I also want to be a haxxor.
 
 ## Choosing Vim(NeoVim) over Emacs
 
