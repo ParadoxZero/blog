@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "High-performance web server & caching strategy"
+title:  "Building a fault tolerant web service"
 date:   2025-03-16
 tags: design scalability
 categories: code
 author: Sidhin S Thomas
-published: false
+published: true
 ---
 
 I'll talk about a system design problem and how to approach it from a Software Architect's point of
@@ -22,13 +22,15 @@ view.
   - [Designing the cache](#designing-the-cache)
   - [Consistent hashing](#consistent-hashing)
   - [Replicas](#replicas)
-  - [Consensus protocol](#consensus-protocol)
+  - [Quorum based Consensus protocol](#quorum-based-consensus-protocol)
 - [Database](#database)
+  - [Database Replicas](#database-replicas)
+- [Conclusion](#conclusion)
 
 
 ## Problem statement
 
-Design a high-performance, highly scaled, cross - geo, web service which would be accessed by 
+Design a high-performance, scaled, cross - geo, web service which would be accessed by 
 millions of users. For reference we can consider a service like Reddit.
 
 ### Non Functional Considerations (Requirements)
@@ -212,7 +214,9 @@ maximum.
 The algorithm creates a circle where `max + 1 == min`. Now each cache server is mapped to a specific
 hash value.
 
+<div style="width: 100%;align='center';display: flex;flex-direction: row;justify-content: space-around;">
 <img src="{{site.url}}/assets/images/consistent_hashing.png" height=300/>
+</div>
 
 Then there would be function similar to `getNode(key)` which is implemented by a simple logic - 
 
@@ -253,7 +257,7 @@ software doesn't. Then a wrapper service/ interface will need to be created to h
 This service will ensure a "write" request is complete only till `x` replicas 
 acknowledge it. Simplest is `N/2 + 1` to ensure majority is updates.
 
-### Consensus protocol
+### Quorum based Consensus protocol
 
 Depending on your consistency requirement, the quorum amount changes. The quorum to update the 
 state is the consensus protocol of the system and specifics of it determine the consistency level of
@@ -261,6 +265,12 @@ the system.
 
 The more consistent you want things to be - the more time it takes for a write operation to 
 complete.
+
+There is a famous rule to achieve consistency of data `R + W > N`. Which means sum of Read replicas
+required to read a value and Write replicas required to update a value should be greater
+than total number of replicas. This ensures should be overlap between write and read operations.
+
+These values can be tuned to get the desired consistency levels.
 
 ## Database
 
@@ -274,3 +284,47 @@ loads.
 > Note: There would be some sub systems here which are an exception. E.g. Authentication. A password
 > change or a log out should reflect immediately everywhere. 
 
+### Database Replicas
+For a basic tolerance we can start with two read replica that will serve as a failover node to 
+ensure **high availability**. 
+
+<div style="width: 100%;align='center';display: flex;flex-direction: row;justify-content: space-around;">
+<img src="{{site.url}}/assets/images/db-replica.png" height=300/>
+</div>
+
+To balance cost and tolerance we can have multiple replicas with only 1 running as a failover 
+candidate. The other replicas can be running in much smaller compute to save costs. And scaling up
+only when the senior most node gets promoted to primary.
+
+When working with multiple read replicas. The question of consensus comes here as well. When do you 
+mark a write successful? 
+
+1. For highly consistent/ fault tolerant system. We will need to get acknowledgement from all read
+   replicas. Resulting in slower writes.
+
+2. For applications like a social media, things like comments/ like being little inconsistent 
+   between users or even different session of same user is something we can live with. Hence we can
+   have less consistent reads with faster writes.
+
+At this stage we don't need to create multiple write replicas. Those complicate the equation quite
+a lot. But for the scale of 10 QPS, even 100 QPS. A single write server would be able to handle it
+with ease.
+
+If we start seeing query performance degradation, we can profile and start considering data 
+partitioning to further scale the servers. A good news is, it's generally easy to partition 
+(aka Shard) the data geographically. Allowing different write replicas handling different partitions
+in different geo. Resulting in better local performance and reduced load on the servers.
+
+## Conclusion
+
+We need the following components for a high availability transactional system to ensure robust
+up time and reliability.
+
+1. Load balancer
+2. Service registry
+3. Stateless application servers
+4. Distributed cache servers
+5. Database servers with replica
+
+Spreading the replicas across data centers will complete the fault tolerance of the system. This
+will let us have working failover in case of disasters.
