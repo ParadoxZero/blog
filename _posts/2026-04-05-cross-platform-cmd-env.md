@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cross platform env
+title: Cross platform configurations
 date: 2026-06-13
 tags: code cross-platform
 categories: code
