@@ -1,6 +1,6 @@
 ---
 title: NeoVim a year later
-published:
+published: true
 tags:
   - code
   - tools
